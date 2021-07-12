@@ -206,6 +206,7 @@ class UNet_100(nn.Module):
         x_flat = self.branch_2(x_flat)
         x = self.out_nonlin(x)
         obj = x.squeeze(1)                                      # [B, 100, 100]
+        # obj = (obj / obj.sum())
         cnt = self.regressor(x_flat).squeeze(-1)                # [B]
 
         return obj, cnt

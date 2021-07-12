@@ -5,7 +5,6 @@ import csv
 import random
 from PIL import Image
 from torch.utils.data import DataLoader, Dataset
-from torch.utils.data.dataset import T
 import torchvision.transforms.functional as FT
 import numpy as np
 import matplotlib.pyplot as plt
@@ -300,8 +299,8 @@ class SKU110K_Dataset(Dataset):
 
         # 전체 map 을 normalization.
         pd_tensor = (pd_tensor - pd_tensor.min()) / (pd_tensor.max() - pd_tensor.min())
-        pd_tensor = (pd_tensor / pd_tensor.sum())
-        print(pd_tensor.sum())
+        # pd_tensor = (pd_tensor / pd_tensor.sum())
+        # print(pd_tensor.sum())
         return pd_tensor
 
 
