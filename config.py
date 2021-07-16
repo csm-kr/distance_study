@@ -33,12 +33,14 @@ def parse(args):
 
     parser.set_defaults(paeng=True)
     parser.add_argument('--paeng', dest='paeng', action='store_true')
+    parser.set_defaults(sm=False)
+    parser.add_argument('--sm', dest='sm', action='store_true')
     opts = parser.parse_args(args)
 
     if opts.paeng:
         # opts.data_root = '/home/pkserver2/data/sku110k'
         opts.data_root = '/home/cvml-paeng/paengdisk/data/sku110k'
+        if opts.sm:
+            opts.data_root = 'D:\data\SKU110K_fixed'
 
-
-    
     return opts
