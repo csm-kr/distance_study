@@ -16,11 +16,16 @@ class JSD_Loss(nn.Module):
         :param qk: torch.FloatTensor()
         :return:
         """
-        # normalise
+        # normalize
+        eps = torch.zeros(pk.shape) + 1e-12
+        pk = pk + eps.cuda()
+        qk = qk + eps.cuda()
         pk = 1.0 * pk / torch.sum(pk, dim=0)
-        if len(qk) != len(pk):
-            raise ValueError("qk and pk must have same length.")
         qk = 1.0 * qk / torch.sum(qk, dim=0)
+        if len(qk) != len(pk):
+            raise ValueError("qk and pk must have same batch.")
+        elif qk.shape != pk.shape:
+            raise ValueError("qk and pk must have same shape.")
         return torch.sum(self.entropy_multi(pk, qk), dim=0)
 
     def forward(self, output, labels):
