@@ -30,7 +30,8 @@ class JSD_Loss(nn.Module):
         :param labels: [B, 10000]
         :return: JSD(output, labels)
         """
-        pk = output.unsqueeze(-1)
+        # pk = output.unsqueeze(-1)
+        pk = output
         qk = labels.type(torch.float32)
         m = (pk + qk) / 2
         kl_pm = self.KLD(pk, m)

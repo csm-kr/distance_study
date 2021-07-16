@@ -13,7 +13,7 @@ def parse(args):
     parser.add_argument('--lr', type=float, default=1e-4)                 # 4e-5
     parser.add_argument('--momentum', type=float, default=0.9)
     parser.add_argument('--weight_decay', type=float, default=5e-4)       # 0.0001
-    parser.add_argument('--batch_size', type=int, default=1)
+    parser.add_argument('--batch_size', type=int, default=2)
     parser.add_argument('--scale', type=int, default=8)
     parser.add_argument('--vis_step', type=int, default=10)
 
@@ -30,5 +30,16 @@ def parse(args):
     parser.add_argument('--data_type', type=str, default='sku', help='choose voc or coco')               # FIXME
     parser.add_argument('--num_classes', type=int, default=1)
     parser.add_argument('--resize', type=int, default=800)                                               # FIXME
+
+    parser.add_argument('--paeng', dest='paeng', action='store_true')
+    parser.set_defaults(paeng=True)
+
     opts = parser.parse_args(args)
+
+    if opts.paeng:
+        # opts.data_root = '/home/pkserver2/data/sku110k'
+        opts.data_root = '/home/cvml-paeng/paengdisk/data/sku110k'
+
+
+    
     return opts

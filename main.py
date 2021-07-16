@@ -29,7 +29,7 @@ def main():
     vis = visdom.Visdom(port=opts.port)
 
     # 3. dataset & loader
-    train_set = SKU110K_Dataset(split='train', resize=800, visualize=False)
+    train_set = SKU110K_Dataset(root=opts.data_root, split='train', resize=800, visualize=False)
     train_loader = torch.utils.data.DataLoader(train_set,
                                                batch_size=opts.batch_size,
                                                collate_fn=train_set.collate_fn,
@@ -40,9 +40,9 @@ def main():
     model = UNet_100(n_channels=3, n_classes=1).to(device)
 
     # 5. loss
-    criterion = nn.L1Loss()
-    criterion = nn.BCELoss()
-    # criterion = JSD_Loss()
+    # criterion = nn.L1Loss()
+    # criterion = nn.BCELoss()
+    criterion = JSD_Loss()
 
     # 6. optimizer
     optimizer = torch.optim.SGD(params=model.parameters(),
