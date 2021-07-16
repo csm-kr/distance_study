@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from config import device
 
 
 class JSD_Loss(nn.Module):
@@ -18,8 +19,8 @@ class JSD_Loss(nn.Module):
         """
         # normalize
         eps = torch.zeros(pk.shape) + 1e-12
-        pk = pk + eps.cuda()
-        qk = qk + eps.cuda()
+        pk = pk + eps.to(device)
+        qk = qk + eps.to(device)
         pk = 1.0 * pk / torch.sum(pk, dim=0)
         qk = 1.0 * qk / torch.sum(qk, dim=0)
         if len(qk) != len(pk):
