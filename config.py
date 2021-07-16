@@ -31,7 +31,7 @@ def parse(args):
     parser.add_argument('--num_classes', type=int, default=1)
     parser.add_argument('--resize', type=int, default=800)                                               # FIXME
 
-    parser.set_defaults(paeng=False)
+    parser.set_defaults(paeng=True)
     parser.add_argument('--paeng', dest='paeng', action='store_true')
     opts = parser.parse_args(args)
 

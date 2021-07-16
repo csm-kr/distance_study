@@ -17,10 +17,10 @@ class JSD_Loss(nn.Module):
         :param qk: torch.FloatTensor()
         :return:
         """
-        # normalize
         eps = torch.zeros(pk.shape) + 1e-12
         pk = pk + eps.to(device)
         qk = qk + eps.to(device)
+        # normalize
         pk = 1.0 * pk / torch.sum(pk, dim=0)
         qk = 1.0 * qk / torch.sum(qk, dim=0)
         if len(qk) != len(pk):
