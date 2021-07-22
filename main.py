@@ -7,6 +7,7 @@ from dataset.sku110_dataset import SKU110K_Dataset
 import torch.nn as nn
 import time
 from loss import JSD_Loss
+from loss import EMD_Loss
 
 
 def vis_origin_img(images):
@@ -43,6 +44,7 @@ def main():
     # criterion = nn.L1Loss()
     # criterion = nn.BCELoss()
     criterion = JSD_Loss()
+    criterion = EM_Loss()
 
     # 6. optimizer
     optimizer = torch.optim.SGD(params=model.parameters(),

@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import numpy as np
 from config import device
 
 
@@ -45,3 +46,40 @@ class JSD_Loss(nn.Module):
         jsd = (kl_pm + kl_qm)/2
         ret = torch.sum(jsd)
         return ret
+
+
+class Discriminator(nn.Module):
+    def __init__(self):
+        super(Discriminator, self).__init__()
+
+        self.model = nn.Sequential(
+            nn.Linear(int(np.prod(100,100)), 512),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Linear(512, 256),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Linear(256, 1),
+        )
+
+    def forward(self, img):
+        img_flat = img.view(img.shape[0], -1)
+        validity = self.model(img_flat)
+        return validity
+
+
+# Wasserstein Distance
+class EMD_Loss(nn.Module):
+    def __init__(self):
+        super(EMD_Loss, self).__init__()
+        self.discriminator = Discriminator()
+    
+    
+    def forward(self, output, labels):
+        # output.shape : [B, 100, 100]
+        # label.shape : [B, 100, 100]
+        pk = output
+        qk = labels.type(torch.float32)
+        loss = -torch.mean(self.discriminator(pk)) + torch.mean(self.discriminator(qk))
+
+        return loss
+
+
