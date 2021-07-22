@@ -78,9 +78,10 @@ class EMD_Loss(nn.Module):
         self.discriminator = Discriminator().to(device)
     
     def compute_gradient_penalty(D, real_samples, fake_samples):
+        # [b, 100, 100]
         """Calculates the gradient penalty loss for WGAN GP"""
         # Random weight term for interpolation between real and fake samples
-        alpha = torch.cuda.FloatTensor(np.random.random((real_samples.size(0), 1, 1, 1)))
+        alpha = torch.cuda.FloatTensor(np.random.random((real_samples.size(0), 1, 1)))
         # Get random interpolation between real and fake samples
         interpolates = (alpha * real_samples + ((1 - alpha) * fake_samples)).requires_grad_(True)
         d_interpolates = D(interpolates)
