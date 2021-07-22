@@ -40,7 +40,7 @@ def parse(args):
     if opts.paeng:
         # opts.data_root = '/home/pkserver2/data/sku110k'
         opts.data_root = '/home/cvml-paeng/paengdisk/data/sku110k'
-        if opts.sm:
-            opts.data_root = 'D:\data\SKU110K_fixed'
+    if opts.sm:
+        opts.data_root = 'D:\data\SKU110K_fixed'
 
     return opts
