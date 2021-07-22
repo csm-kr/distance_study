@@ -54,9 +54,11 @@ class JSD_Loss(nn.Module):
 class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator, self).__init__()
+        
+        self.img_shape = (100, 100)
 
         self.model = nn.Sequential(
-            nn.Linear(int(np.prod(100,100)), 512),
+            nn.Linear(int(np.prod(self.img_shape)), 512),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Linear(512, 256),
             nn.LeakyReLU(0.2, inplace=True),
