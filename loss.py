@@ -77,7 +77,7 @@ class EMD_Loss(nn.Module):
         super(EMD_Loss, self).__init__()
         self.discriminator = Discriminator().to(device)
     
-    def compute_gradient_penalty(D, real_samples, fake_samples):
+    def compute_gradient_penalty(self, D, real_samples, fake_samples):
         # [b, 100, 100]
         """Calculates the gradient penalty loss for WGAN GP"""
         # Random weight term for interpolation between real and fake samples
