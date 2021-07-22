@@ -44,7 +44,7 @@ def main():
     # criterion = nn.L1Loss()
     # criterion = nn.BCELoss()
     criterion = JSD_Loss()
-    criterion = EM_Loss()
+    criterion = EMD_Loss()
 
     # 6. optimizer
     optimizer = torch.optim.SGD(params=model.parameters(),
