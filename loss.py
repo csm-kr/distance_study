@@ -118,3 +118,14 @@ class EMD_Loss(nn.Module):
         return loss
 
 
+class EMD2_Loss(nn.Module):
+    def __init__(self):
+        super(EMD2_Loss, self).__init__()
+
+    def forward(self, output, labels):
+        # output.shape : [B, 100, 100]
+        # label.shape : [B, 100, 100]
+        pk = output
+        qk = labels.type(torch.float32)
+        loss = -torch.mean(pk) + torch.mean(qk)
+        return loss
