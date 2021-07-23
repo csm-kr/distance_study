@@ -7,7 +7,7 @@ from dataset.sku110_dataset import SKU110K_Dataset
 import torch.nn as nn
 import time
 from loss import JSD_Loss
-from whd_loss import WeightedHausdorffDistance
+from whd_loss import HausdorffDistance
 
 def vis_origin_img(images):
     '''
@@ -41,9 +41,9 @@ def main():
 
     # 5. loss
     # criterion = nn.L1Loss()
-    # criterion = nn.BCELoss()
+    criterion = nn.BCELoss()
     # criterion = JSD_Loss()
-    criterion = WeightedHausdorffDistance()
+    # criterion = HausdorffDistance()
 
     # 6. optimizer
     optimizer = torch.optim.SGD(params=model.parameters(),

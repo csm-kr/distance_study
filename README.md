@@ -30,6 +30,17 @@ map = datas[5] (Gaussian)
 ![](./fig/images2.JPG)
 ![](./fig/gaussianmap2.JPG)
 
+HD
+
+![](./fig/origin.JPG)
+
+L1
+
+![](./fig/L1_loss.JPG)
+
+BCE
+
+![](./fig/bce_map.JPG)
 
  - model : depth-wise separable convolutional unet 
  - output of model : [B, 100, 100], [B]
