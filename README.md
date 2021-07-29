@@ -46,6 +46,15 @@ BCE
 
 ![](./fig/bce_map.JPG)
 
+HD + BCE
+
+![](./fig/hd_bce_1.JPG)
+![](./fig/hd_bce_2.JPG)
+![](./fig/hd_bce_3.JPG)
+![](./fig/hd_bce_4.JPG)
+![](./fig/hd_bce_5.JPG)
+![](./fig/hd_bce_6.JPG)
+
  - model : depth-wise separable convolutional unet 
  - output of model : [B, 100, 100], [B]
  
