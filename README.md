@@ -34,6 +34,10 @@ HD
 
 ![](./fig/origin.JPG)
 
+HD (Improved)
+
+![](./fig/improved.JPG)
+
 L1
 
 ![](./fig/L1_loss.JPG)

@@ -63,6 +63,7 @@ class WeightedHausdorffDistance(nn.Module):
 
         super().__init__()
 
+        self.bce = nn.BCELoss()
         # Prepare all possible (row, col) locations in the image
         self.height, self.width = resized_height, resized_width
         self.resized_size = torch.tensor([resized_height,
@@ -166,7 +167,7 @@ class WeightedHausdorffDistance(nn.Module):
             term_1 = (1 / (n_est_pts + 1e-6)) * torch.sum(p * torch.min(d_matrix, 1)[0])
             term_1_ = (1 / (n_est_pts + 1e-6)) * torch.sum(torch.min(p_replicated * d_matrix, 1)[0])
             # print(torch.equal(p * torch.min(d_matrix, 1)[0], torch.min(p_replicated * d_matrix, 1)[0]))
-            weighted_d_matrix = (1 - p_replicated) * self.max_dist # + p_replicated * d_matrix
+            weighted_d_matrix = (1 - p_replicated) * self.max_dist + p_replicated * d_matrix
 
             # minn = generaliz_mean(weighted_d_matrix,
             #                       p=self.p,
@@ -182,6 +183,9 @@ class WeightedHausdorffDistance(nn.Module):
         terms_1 = torch.stack(terms_1)
         terms_2 = torch.stack(terms_2)
         res = terms_1.mean() + terms_2.mean()
+        bce = self.bce(prob_map, gt_map)
+
+        res += bce
 
         return res
 
@@ -290,13 +294,13 @@ class W_HausdorffDistance(nn.Module):
             term_1 = (1 / (n_est_pts + 1e-6)) * torch.sum(p * torch.min(d_matrix, 1)[0])
             weighted_d_matrix = (1 - p_replicated) * self.max_dist + p_replicated * d_matrix
 
-            minn = generaliz_mean(weighted_d_matrix,
-                                  p=self.p,
-                                  dim=0, keepdim=False)
-            term_2 = torch.mean(minn)
+            # minn = generaliz_mean(weighted_d_matrix,
+            #                       p=self.p,
+            #                       dim=0, keepdim=False)
+            # term_2 = torch.mean(minn)
 
             # our method
-            # term_2 = torch.mean(torch.min(weighted_d_matrix, 0)[0])  # FIXME
+            term_2 = torch.mean(torch.min(weighted_d_matrix, 0)[0])  # FIXME
 
             terms_1.append(term_1)
             terms_2.append(term_2)
