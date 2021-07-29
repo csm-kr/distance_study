@@ -50,7 +50,7 @@ BCE
 
 JSD
 
-![] (./fig/jsd_loss.JPG)
+![](./fig/jsd_loss.JPG)
 
 HD + BCE
 
