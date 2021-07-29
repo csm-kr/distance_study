@@ -1,5 +1,6 @@
 # Distance study
-our goal is to find adaptive loss function. (able to measure distribution concept) 
+
+our goal is to find adaptive loss function. (able to measure distribution concept)
 
 ### TODO List
 
@@ -10,11 +11,11 @@ our goal is to find adaptive loss function. (able to measure distribution concep
 - [ ] KL divergence
 - [ ] JSD divergence
 
- 
- ### Setting
- 
- - dataset:  SKU110k dataset 
- ```
+### Setting
+
+- dataset: SKU110k dataset
+
+```
 in main.py 60 lines
 
 images = datas[0]
@@ -25,6 +26,7 @@ cnt = datas[4]
 map = datas[5] (Gaussian)
 
 ```
+
 ![](./fig/images1.JPG)
 ![](./fig/gaussianmap1.JPG)
 ![](./fig/images2.JPG)
@@ -46,6 +48,10 @@ BCE
 
 ![](./fig/bce_map.JPG)
 
+JSD
+
+![] (./fig/jsd_loss.JPG)
+
 HD + BCE
 
 ![](./fig/hd_bce_1.JPG)
@@ -55,9 +61,5 @@ HD + BCE
 ![](./fig/hd_bce_5.JPG)
 ![](./fig/hd_bce_6.JPG)
 
- - model : depth-wise separable convolutional unet 
- - output of model : [B, 100, 100], [B]
- 
-
-
-
+- model : depth-wise separable convolutional unet
+- output of model : [B, 100, 100], [B]
